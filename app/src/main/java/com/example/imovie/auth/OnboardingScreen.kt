@@ -24,9 +24,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.imovie.R
-import com.example.imovie.components.AppButton
-import com.example.imovie.components.ButtonVariant
-import com.example.imovie.navGraph.Destination
+import com.example.imovie.common.AppButton
+import com.example.imovie.common.ButtonVariant
+import com.example.imovie.navigation.Destination
 
 @Composable
 fun OnboardingScreen(navController: NavHostController) {

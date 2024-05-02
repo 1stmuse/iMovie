@@ -1,4 +1,4 @@
-package com.example.imovie.navGraph
+package com.example.imovie.navigation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
@@ -13,8 +13,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.imovie.auth.login.LoginScreen
 import com.example.imovie.auth.OnboardingScreen
 import com.example.imovie.auth.signup.SignupScreen
+import com.example.imovie.navigation.navgraphs.authNavGraph
+import com.example.imovie.navigation.navgraphs.dashbaordGraph
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "SuspiciousIndentation")
 @Composable
 fun IMovie(startDestination: String) {
 
@@ -25,15 +27,8 @@ fun IMovie(startDestination: String) {
                 .padding(all = 0.dp)
         ) {
             NavHost(navController = navController, startDestination = startDestination){
-                composable(route = Destination.Onboarding.route){
-                    OnboardingScreen(navController)
-                }
-                composable(route = Destination.Login.route){
-                    LoginScreen(navController)
-                }
-                composable(route = Destination.Signup.route){
-                    SignupScreen(navController)
-                }
+                authNavGraph(navController)
+                dashbaordGraph(navController)
             }
         }
 

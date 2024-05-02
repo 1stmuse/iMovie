@@ -82,6 +82,16 @@ dependencies {
    // Splash screen
     implementation("androidx.core:core-splashscreen:1.0.1")
 
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+
+    //OKHTTP
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
     //    Hilt
     implementation("com.google.dagger:hilt-android:2.50")
     implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
@@ -89,4 +99,8 @@ dependencies {
 
     //navigation
     implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    //Pagin
+    val pagingVersion = "3.2.1"
+    implementation("androidx.paging:paging-runtime:$pagingVersion")
 }

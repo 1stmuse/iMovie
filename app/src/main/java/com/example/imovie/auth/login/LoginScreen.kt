@@ -1,6 +1,5 @@
 package com.example.imovie.auth.login
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,9 +25,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.imovie.components.AppButton
-import com.example.imovie.components.AppTextInput
-import com.example.imovie.navGraph.Destination
+import com.example.imovie.common.AppButton
+import com.example.imovie.common.AppTextInput
+import com.example.imovie.navigation.Destination
 import com.example.imovie.ui.theme.PrimaryColor
 
 

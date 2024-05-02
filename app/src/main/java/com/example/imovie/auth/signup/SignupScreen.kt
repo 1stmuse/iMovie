@@ -20,18 +20,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.imovie.auth.login.LoginEvents
-import com.example.imovie.auth.login.LoginViewModel
-import com.example.imovie.components.AppButton
-import com.example.imovie.components.AppTextInput
-import com.example.imovie.navGraph.Destination
+import com.example.imovie.common.AppButton
+import com.example.imovie.common.AppTextInput
+import com.example.imovie.navigation.Destination
 import com.example.imovie.ui.theme.PrimaryColor
 
 @Composable
@@ -73,7 +70,7 @@ fun SignupScreen(navController: NavHostController) {
         }
         Spacer(modifier = Modifier.height(20.dp))
         Text(text = buildAnnotatedString {
-            append("Already have an account ?")
+            append("Already have an account ? ")
             withStyle(
                SpanStyle(
                    color = Color.Magenta
