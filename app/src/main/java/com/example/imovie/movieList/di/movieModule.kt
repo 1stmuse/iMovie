@@ -3,6 +3,7 @@ package com.example.imovie.movieList.di
 import com.example.imovie.movieList.data.remote.movieApi
 import com.example.imovie.movieList.data.repositoryImpl.MovieRepositoryImpl
 import com.example.imovie.movieList.domain.repository.MovieRepository
+import com.example.imovie.movieList.domain.useCases.GetMovieDetail
 import com.example.imovie.movieList.domain.useCases.GetNowShowingMovies
 import com.example.imovie.movieList.domain.useCases.GetPopularMovies
 import com.example.imovie.movieList.domain.useCases.GetUpcomingMovies
@@ -58,7 +59,8 @@ object movieModule {
             getNowShowingMovies = GetNowShowingMovies(movieRepository),
             getPopularMovies = GetPopularMovies(movieRepository),
             getUpcomingMovies = GetUpcomingMovies(movieRepository),
-            searchMovieUsecase = SearchMovieUsecase(movieRepository)
+            searchMovieUsecase = SearchMovieUsecase(movieRepository),
+            getMovieDetail = GetMovieDetail(movieRepository)
         )
     }
 

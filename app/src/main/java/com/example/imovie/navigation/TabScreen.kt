@@ -50,7 +50,7 @@ fun TabScreens(
                 Homescreen(navController)
             }
             composable(route = Destination.Search.route){
-                SearchScreen()
+                SearchScreen(navController)
             }
 
             composable(route = Destination.Favourites.route){

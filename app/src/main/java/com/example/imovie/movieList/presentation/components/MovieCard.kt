@@ -2,6 +2,7 @@ package com.example.imovie.movieList.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -25,7 +26,7 @@ import com.example.imovie.utils.CONSTANTS
 
 
 @Composable
-fun MovieCard(movie: Movie) {
+fun MovieCard(movie: Movie, onClick: ()-> Unit) {
 
     val imageP = rememberAsyncImagePainter(model = ImageRequest
         .Builder(LocalContext.current).data(CONSTANTS.IMAGE_BASE_URL + movie.poster_path)
@@ -39,12 +40,13 @@ fun MovieCard(movie: Movie) {
             .height(300.dp)
             .clip(RoundedCornerShape(10.dp))
             .background(DarkPrimary)
+            .clickable { onClick() }
 
 
     ) {
         if(imageP.state is AsyncImagePainter.State.Success){
             Image(painter = imageP, contentDescription = null,
-                contentScale = ContentScale.FillBounds,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier.width(200.dp)
                     .height(300.dp).clip(RoundedCornerShape(10.dp))
             )

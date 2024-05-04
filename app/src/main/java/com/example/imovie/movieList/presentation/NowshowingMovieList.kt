@@ -20,7 +20,8 @@ import com.example.imovie.movieList.presentation.components.MovieCard
 
 @Composable
 fun NowShowingMovieList(
-    movies: List<Movie>
+    movies: List<Movie>,
+    onItemClick: (id: Int) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -32,7 +33,9 @@ fun NowShowingMovieList(
             horizontalArrangement = Arrangement.spacedBy(30.dp)
         ){
             items(movies){ item ->
-                MovieCard(movie = item)
+                MovieCard(movie = item, onClick = {
+                    onItemClick(item.id)
+                })
             }
         }
     }

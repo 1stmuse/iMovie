@@ -33,7 +33,7 @@ class MovieRepositoryImpl(
     }
 
     override suspend fun getMovieDetails(id: Int): Movie {
-        return  movieApi.getMovieDetails((id))
+        return movieApi.getMovieDetails((id))
     }
 
     override suspend fun searchMovie(title: String): Flow<List<Movie>> {

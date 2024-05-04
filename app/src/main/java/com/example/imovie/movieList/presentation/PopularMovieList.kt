@@ -20,7 +20,8 @@ import com.example.imovie.movieList.presentation.components.MovieCard
 
 @Composable
 fun PopularMovieList(
-    movies: List<Movie>
+    movies: List<Movie>,
+    onItemClick: (id: Int) -> Unit
 ) {
 
     Column(
@@ -33,7 +34,9 @@ fun PopularMovieList(
             horizontalArrangement = Arrangement.spacedBy(30.dp)
         ){
             items(movies){ item ->  
-                MovieCard(movie = item)
+                MovieCard(movie = item, onClick = {
+                    onItemClick(item.id)
+                })
             }
         }
     }

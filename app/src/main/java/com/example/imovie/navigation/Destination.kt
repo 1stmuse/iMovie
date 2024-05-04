@@ -17,4 +17,8 @@ sealed class Destination(val route: String) {
 
     object Favourites: Destination("favourites")
     object Settings: Destination("settings")
+
+    data object MovieDetail: Destination("movieDetail/{movieId}")
+
+    val baseRoute = route.substringBefore('/')
 }

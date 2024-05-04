@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.imovie.movieList.presentation.MovielistViewmodel
 import com.example.imovie.movieList.presentation.NowShowingMovieList
 import com.example.imovie.movieList.presentation.PopularMovieList
+import com.example.imovie.navigation.Destination
 import com.example.imovie.ui.theme.DarkPrimary
 import com.example.imovie.ui.theme.PrimaryColor
 import com.example.imovie.ui.theme.SecondaryColor
@@ -72,9 +73,13 @@ fun Homescreen(
                 }
 
                 Spacer(modifier = Modifier.height(30.dp))
-                PopularMovieList(movies = popularMovies)
+                PopularMovieList(movies = popularMovies, onItemClick = {
+                    navController.navigate("${Destination.MovieDetail.baseRoute}/${it}")
+                })
                 Spacer(modifier = Modifier.height(40.dp))
-                NowShowingMovieList(movies = upcomingMovies)
+                NowShowingMovieList(movies = upcomingMovies, onItemClick = {
+                    navController.navigate("${Destination.MovieDetail.baseRoute}/${it}")
+                } )
 
 
             }
