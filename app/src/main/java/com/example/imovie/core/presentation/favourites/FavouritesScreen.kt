@@ -1,4 +1,4 @@
-package com.example.imovie.core.presentation.settings
+package com.example.imovie.core.presentation.favourites
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -10,9 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-@Composable
-fun SettingsScreen() {
 
+@Composable
+fun FavouritesScreen() {
     Column(
         modifier = Modifier.fillMaxSize()
             .background(Color.Black)

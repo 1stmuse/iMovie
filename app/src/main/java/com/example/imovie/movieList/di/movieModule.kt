@@ -1,6 +1,13 @@
 package com.example.imovie.movieList.di
 
 import com.example.imovie.movieList.data.remote.movieApi
+import com.example.imovie.movieList.data.repositoryImpl.MovieRepositoryImpl
+import com.example.imovie.movieList.domain.repository.MovieRepository
+import com.example.imovie.movieList.domain.useCases.GetNowShowingMovies
+import com.example.imovie.movieList.domain.useCases.GetPopularMovies
+import com.example.imovie.movieList.domain.useCases.GetUpcomingMovies
+import com.example.imovie.movieList.domain.useCases.MovieListUseCases
+import com.example.imovie.movieList.domain.useCases.SearchMovieUsecase
 import com.example.imovie.utils.CONSTANTS
 import dagger.Module
 import dagger.Provides
@@ -38,6 +45,21 @@ object movieModule {
     @Provides
     fun provideMovieApi(retrofit: Retrofit): movieApi {
         return  retrofit.create(movieApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providesMovielistRepo(movieApi: movieApi): MovieRepository = MovieRepositoryImpl(movieApi)
+
+    @Singleton
+    @Provides
+    fun providesMovieListUseCases(movieRepository: MovieRepository): MovieListUseCases  {
+        return MovieListUseCases(
+            getNowShowingMovies = GetNowShowingMovies(movieRepository),
+            getPopularMovies = GetPopularMovies(movieRepository),
+            getUpcomingMovies = GetUpcomingMovies(movieRepository),
+            searchMovieUsecase = SearchMovieUsecase(movieRepository)
+        )
     }
 
 }

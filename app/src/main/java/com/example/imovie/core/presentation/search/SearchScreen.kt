@@ -1,0 +1,86 @@
+package com.example.imovie.core.presentation.search
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.imovie.common.AppTextInput
+import com.example.imovie.common.SearchInput
+import com.example.imovie.movieList.presentation.components.MovieCard
+import com.example.imovie.ui.theme.DarkPrimary
+import com.example.imovie.ui.theme.PrimaryColor
+import com.example.imovie.ui.theme.SecondaryColor
+
+
+@Composable
+fun SearchScreen() {
+    
+    val vm: SearchViewmodel = hiltViewModel()
+    val uiState = vm.uiState.collectAsState().value
+    
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black)
+            .padding(top = 40.dp)
+            .padding(horizontal = 20.dp)
+    ) {
+        SearchInput(value = uiState.searchTerm, placeholder = "Search for a title..." ,
+            onChange = {
+                vm.searchMovie(UiEvents.OnChange(it))
+            },
+            leadingIcon = {
+                Icon(imageVector = Icons.Default.Menu, contentDescription = null,
+                    tint = PrimaryColor
+                )
+            },
+            trailingIcon = {
+                if(uiState.searchTerm.isEmpty()){
+                    Icon(imageVector = Icons.Default.Search, contentDescription = null,
+                        tint = PrimaryColor
+                    )
+                } else {
+                    Icon(imageVector = Icons.Default.Close, contentDescription = null,
+                        tint = PrimaryColor
+                    )
+                }
+            }
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+        LazyColumn(
+            modifier = Modifier.horizontalScroll(rememberScrollState())
+        ) {
+            if(uiState.movies.isNotEmpty()){
+                items(uiState.movies){
+                    MovieCard(movie = it)
+                }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun SearchPrev() {
+    SearchScreen()
+}

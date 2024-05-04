@@ -13,7 +13,9 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.imovie.core.presentation.favourites.FavouritesScreen
 import com.example.imovie.core.presentation.home.Homescreen
+import com.example.imovie.core.presentation.search.SearchScreen
 import com.example.imovie.core.presentation.settings.SettingsScreen
 import com.example.imovie.navigation.components.BottomTabs
 
@@ -48,11 +50,11 @@ fun TabScreens(
                 Homescreen(navController)
             }
             composable(route = Destination.Search.route){
-//                SearchScreen()
+                SearchScreen()
             }
 
             composable(route = Destination.Favourites.route){
-//                FavouritesScreen()
+                FavouritesScreen()
             }
 
             composable(route = Destination.Settings.route){

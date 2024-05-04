@@ -9,6 +9,8 @@ interface MovieRepository {
 
     suspend fun getAllCategoryMovies(category: String, page: Int): Flow<PagingData<Movie>>
 
-    suspend fun getMovies(category: String, page: Int): Flow<Response>
+    suspend fun getMovies(category: String, page: Int = 1): Flow<List<Movie>>
     suspend fun getMovieDetails(id: Int): Movie
+
+    suspend fun searchMovie(title: String): Flow<List<Movie>>
 }
