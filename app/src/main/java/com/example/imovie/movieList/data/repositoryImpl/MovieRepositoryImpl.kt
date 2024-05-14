@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.example.imovie.movieList.data.model.Cast
 import com.example.imovie.movieList.data.model.Movie
+import com.example.imovie.movieList.data.model.Video
 import com.example.imovie.movieList.data.remote.MoviePagingSource
 import com.example.imovie.movieList.data.remote.movieApi
 import com.example.imovie.movieList.domain.repository.MovieRepository
@@ -40,6 +42,18 @@ class MovieRepositoryImpl(
         return flow {
             Log.d("MOVIES", "${movieApi.searchMovie(title).results} movies ooo")
             emit(movieApi.searchMovie(title).results)
+        }
+    }
+
+    override suspend fun getMovieCast(id: Int): Flow<List<Cast>> {
+        return flow {
+            emit(movieApi.getMovieCast(id).cast)
+        }
+    }
+
+    override suspend fun getMovieVideos(id: Int): Flow<List<Video>> {
+        return flow {
+            emit(movieApi.getMovieVideo(id).results)
         }
     }
 

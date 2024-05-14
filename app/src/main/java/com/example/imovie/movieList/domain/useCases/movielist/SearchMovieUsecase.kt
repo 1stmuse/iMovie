@@ -1,15 +1,14 @@
-package com.example.imovie.movieList.domain.useCases
+package com.example.imovie.movieList.domain.useCases.movielist
 
-import android.util.Log
 import com.example.imovie.movieList.data.model.Movie
 import com.example.imovie.movieList.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetUpcomingMovies(
+class SearchMovieUsecase(
     private val movieRepository: MovieRepository
 ) {
 
-    suspend operator fun invoke(): Flow<List<Movie>> {
-        return movieRepository.getMovies("upcoming", 1)
+    suspend operator fun invoke(title: String): Flow<List<Movie>> {
+        return movieRepository.searchMovie(title)
     }
 }

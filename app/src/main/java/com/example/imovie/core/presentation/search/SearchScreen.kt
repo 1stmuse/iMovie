@@ -35,6 +35,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.imovie.common.AppTextInput
 import com.example.imovie.common.SearchInput
 import com.example.imovie.movieList.presentation.components.MovieCard
+import com.example.imovie.navigation.Destination
 import com.example.imovie.ui.theme.DarkPrimary
 import com.example.imovie.ui.theme.PrimaryColor
 import com.example.imovie.ui.theme.SecondaryColor
@@ -90,12 +91,14 @@ fun SearchScreen(
                         modifier = Modifier
                             .height(200.dp)
                             .clickable {
-
+                                navController.navigate("${Destination.MovieDetail.baseRoute}/${it.id}")
                             }
                     ) {
                         Column(
                             modifier = Modifier.width(150.dp)
-                        ) { MovieCard(movie = it, onClick = {})
+                        ) { MovieCard(movie = it, onClick = {
+                            navController.navigate("${Destination.MovieDetail.baseRoute}/${it.id}")
+                        })
                         }
 
                         Spacer(modifier = Modifier.width(10.dp))

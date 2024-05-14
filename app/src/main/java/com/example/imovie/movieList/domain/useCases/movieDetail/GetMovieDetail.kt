@@ -1,4 +1,4 @@
-package com.example.imovie.movieList.domain.useCases
+package com.example.imovie.movieList.domain.useCases.movieDetail
 
 import com.example.imovie.movieList.data.model.Movie
 import com.example.imovie.movieList.domain.repository.MovieRepository

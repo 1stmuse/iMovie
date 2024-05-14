@@ -1,14 +1,28 @@
 package com.example.imovie.movieList.di
 
+import android.app.Application
+import androidx.room.Room
+import com.example.imovie.movieList.data.local.Dao.FavouriteDao
+import com.example.imovie.movieList.data.local.MovieDatabase
 import com.example.imovie.movieList.data.remote.movieApi
+import com.example.imovie.movieList.data.repositoryImpl.FavouriteDaoRepoImpl
 import com.example.imovie.movieList.data.repositoryImpl.MovieRepositoryImpl
+import com.example.imovie.movieList.domain.repository.FavouriteDaoRepository
 import com.example.imovie.movieList.domain.repository.MovieRepository
-import com.example.imovie.movieList.domain.useCases.GetMovieDetail
-import com.example.imovie.movieList.domain.useCases.GetNowShowingMovies
-import com.example.imovie.movieList.domain.useCases.GetPopularMovies
-import com.example.imovie.movieList.domain.useCases.GetUpcomingMovies
-import com.example.imovie.movieList.domain.useCases.MovieListUseCases
-import com.example.imovie.movieList.domain.useCases.SearchMovieUsecase
+import com.example.imovie.movieList.domain.useCases.favouriteDao.AddFavMovieUseCase
+import com.example.imovie.movieList.domain.useCases.favouriteDao.FavouriteDaoUseCases
+import com.example.imovie.movieList.domain.useCases.favouriteDao.GetAllFavMoviesUseCase
+import com.example.imovie.movieList.domain.useCases.favouriteDao.GetFavMovieUseCase
+import com.example.imovie.movieList.domain.useCases.favouriteDao.RemoveFavMovieUseCase
+import com.example.imovie.movieList.domain.useCases.movieDetail.GetMovieCast
+import com.example.imovie.movieList.domain.useCases.movieDetail.GetMovieDetail
+import com.example.imovie.movieList.domain.useCases.movieDetail.GetMovieVideos
+import com.example.imovie.movieList.domain.useCases.movielist.GetNowShowingMovies
+import com.example.imovie.movieList.domain.useCases.movielist.GetPopularMovies
+import com.example.imovie.movieList.domain.useCases.movielist.GetUpcomingMovies
+import com.example.imovie.movieList.domain.useCases.movieDetail.MovieDetailUseCases
+import com.example.imovie.movieList.domain.useCases.movielist.MovieListUseCases
+import com.example.imovie.movieList.domain.useCases.movielist.SearchMovieUsecase
 import com.example.imovie.utils.CONSTANTS
 import dagger.Module
 import dagger.Provides
@@ -54,13 +68,50 @@ object movieModule {
 
     @Singleton
     @Provides
-    fun providesMovieListUseCases(movieRepository: MovieRepository): MovieListUseCases  {
+    fun providesMovieListUseCases(movieRepository: MovieRepository): MovieListUseCases {
         return MovieListUseCases(
             getNowShowingMovies = GetNowShowingMovies(movieRepository),
             getPopularMovies = GetPopularMovies(movieRepository),
             getUpcomingMovies = GetUpcomingMovies(movieRepository),
             searchMovieUsecase = SearchMovieUsecase(movieRepository),
-            getMovieDetail = GetMovieDetail(movieRepository)
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideMovieDetailUseCases(movieRepository: MovieRepository): MovieDetailUseCases {
+        return MovieDetailUseCases(
+            getMovieDetail = GetMovieDetail(movieRepository),
+            getMovieCast = GetMovieCast(movieRepository),
+            getMovieVideos = GetMovieVideos(movieRepository)
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideDatabase(application: Application): MovieDatabase{
+        return Room.databaseBuilder(application, MovieDatabase::class.java, "movieDb").fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun providesFavouriteDao(database: MovieDatabase): FavouriteDao  = database.favouriteDao()
+
+    @Singleton
+    @Provides
+    fun providesFavouriteDaoRepo(favouriteDao: FavouriteDao): FavouriteDaoRepository{
+        return FavouriteDaoRepoImpl(favouriteDao)
+    }
+
+    @Singleton
+    @Provides
+    fun providesFavDaoUseCases(favouriteDaoRepository: FavouriteDaoRepository): FavouriteDaoUseCases {
+        return FavouriteDaoUseCases(
+            getAllFavMoviesUseCase = GetAllFavMoviesUseCase(favouriteDaoRepository),
+            getFavMovieUseCase = GetFavMovieUseCase(favouriteDaoRepository),
+            removeFavMovieUseCase = RemoveFavMovieUseCase(favouriteDaoRepository),
+            addFavMovieUseCase = AddFavMovieUseCase(favouriteDaoRepository)
         )
     }
 

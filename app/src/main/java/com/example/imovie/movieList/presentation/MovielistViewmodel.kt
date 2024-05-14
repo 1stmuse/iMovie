@@ -2,7 +2,7 @@ package com.example.imovie.movieList.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.imovie.movieList.domain.useCases.MovieListUseCases
+import com.example.imovie.movieList.domain.useCases.movielist.MovieListUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
